@@ -13,9 +13,7 @@ class CartPage extends StatelessWidget {
 
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Giỏ hàng"),
-      ),
+
       body: Consumer<CartProvider>(
         builder: (context, cartProvider, child) {
           final cartItems = cartProvider.cartItems;

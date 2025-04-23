@@ -1,4 +1,5 @@
 import 'package:ban_ao/pages/layout_page.dart';
+import 'package:ban_ao/responsive/responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(),
-        home: LayoutPage(),
+        // home: LayoutPage(),
+        home: ResponsiveLayout()
       ),
     );
   }

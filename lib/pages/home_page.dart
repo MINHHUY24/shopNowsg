@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
     t_shirt(
       id: '12',
       name: 'DRAGON PRINTED SHIRTS - BLUE',
-      price:  269000,
+      price: 269000,
       imageUrl: 'https://bizweb.dktcdn.net/100/318/614/products/mt-7-compressed.jpg?v=1707300734840',
       description: 'My favorite outfit is a white button-up shirt paired with black trousers. The shirt is made of soft cotton, lightweight and breathable, with a classic collar and long sleeves that can be rolled up for a more casual look. The black trousers are slim-fit, made from stretchy fabric that provides comfort and ease of movement. Together, they create a clean, elegant style suitable for both formal and semi-formal occasions. I usually wear this outfit with black leather shoes and a silver watch to complete the look. Simple yet stylish, this outfit makes me feel confident and well-dressed every time.',
     ),
@@ -160,28 +160,41 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Nowsaigon",
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),),
-      ),
+
       body: Padding(
-          padding: const EdgeInsets.all(8),
-        child: GridView.builder(
-          shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Số lượng cột trong lưới
-            crossAxisSpacing: 10.0, // Khoảng cách ngang giữa các phần tử
-            mainAxisSpacing: 10.0, // Khoảng cách dọc giữa các phần tử
-            childAspectRatio: 0.6, // Tỉ lệ chiều rộng và chiều cao của mỗi sản phẩm
-          ),
-          itemCount: datas.length,
-          itemBuilder: (context, index) {
-            return CustomProductCard(
-              data: datas[index],
+        padding: const EdgeInsets.all(8),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount = 2;
+            double childAspectRatio = 0.6;
+
+            // Điều chỉnh số cột và aspect ratio tùy theo độ rộng màn hình
+            if (constraints.maxWidth < 500) {
+              crossAxisCount = 2;
+              childAspectRatio = 0.6;
+            } else if (constraints.maxWidth < 1100) {
+              crossAxisCount = 4;
+              childAspectRatio = 0.57;
+            } else {
+              crossAxisCount = 6; // Thử 6 cột cho màn hình rộng hơn
+              childAspectRatio = 0.8;
+            }
+
+            return GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 10.0,
+                childAspectRatio: childAspectRatio,
+              ),
+              itemCount: datas.length,
+              itemBuilder: (context, index) {
+                return CustomProductCard(data: datas[index]);
+              },
             );
           },
         ),
       ),
-      );
+    );
   }
 }
