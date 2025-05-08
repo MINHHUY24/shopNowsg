@@ -160,40 +160,62 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            int crossAxisCount = 2;
-            double childAspectRatio = 0.6;
-
-            // Điều chỉnh số cột và aspect ratio tùy theo độ rộng màn hình
-            if (constraints.maxWidth < 500) {
-              crossAxisCount = 2;
-              childAspectRatio = 0.6;
-            } else if (constraints.maxWidth < 1100) {
-              crossAxisCount = 4;
-              childAspectRatio = 0.57;
-            } else {
-              crossAxisCount = 6; // Thử 6 cột cho màn hình rộng hơn
-              childAspectRatio = 0.8;
-            }
-
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth < 500) {
+            // Mobile: ListView
             return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 10.0,
-                childAspectRatio: childAspectRatio,
-              ),
+              padding: const EdgeInsets.all(8),
               itemCount: datas.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                childAspectRatio: 0.58,
+              ),
               itemBuilder: (context, index) {
-                return CustomProductCard(data: datas[index]);
+                return Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: CustomProductCard(data: datas[index]),
+                );
               },
             );
-          },
-        ),
+          } else if (constraints.maxWidth < 1100){
+            return GridView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: datas.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                childAspectRatio: 0.63,
+              ),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 16, right: 4, left: 4),
+                  child: CustomProductCard(data: datas[index]),
+                );
+              },
+            );
+          } else {
+            return GridView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: datas.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5,
+                crossAxisSpacing: 0,
+                mainAxisSpacing: 8,
+                childAspectRatio: 0.8,
+              ),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 16, right: 8, left: 8),
+                  child: CustomProductCard(data: datas[index]),
+                );
+              },
+            );
+          }
+        },
       ),
     );
   }

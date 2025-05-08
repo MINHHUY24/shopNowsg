@@ -46,11 +46,12 @@ class _DesktopLayoutState extends State<DesktopLayout> {
           children: [
             DrawerHeader(
               child: Container(
-                color: Colors.blue,
-                child: const Center(
-                  child: Text(
-                    'Drawer Header',
-                    style: TextStyle(color: Colors.white, fontSize: 24),
+                // color: Colors.blue,
+                child: Center(
+                  child: Image.network(
+                    'https://avatar.iran.liara.run/public/12', // Sử dụng URL trực tiếp
+                    width: 400,
+                    height: 400,
                   ),
                 ),
               ),

@@ -104,10 +104,7 @@ class _ViewDetailPageState extends State<ViewDetailPage> {
                       )
                     ],
                   ),
-
-
                   const SizedBox(height: 8),
-
                   Text(
                       widget.data.description,
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
